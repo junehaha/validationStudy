@@ -7,21 +7,17 @@ import hello.itemservice.domain.item.UpdateCheck;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/validation/v3/items")
+@RequestMapping("/validation/v4/items")
 @RequiredArgsConstructor
-public class ValidationItemControllerV3 {
+public class ValidationItemControllerV4 {
 
     private final ItemRepository itemRepository;
 
@@ -64,7 +60,7 @@ public class ValidationItemControllerV3 {
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);
-        return "redirect:/validation/v3/items/{itemId}";
+        return "redirect:/validation/v4/items/{itemId}";
     }
     @PostMapping("/add")
     public String addItem2(@Validated(SaveCheck.class) @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
@@ -84,7 +80,7 @@ public class ValidationItemControllerV3 {
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);
-        return "redirect:/validation/v3/items/{itemId}";
+        return "redirect:/validation/v4/items/{itemId}";
     }
 
     @GetMapping("/{itemId}/edit")
@@ -111,7 +107,7 @@ public class ValidationItemControllerV3 {
 
 
         itemRepository.update(itemId, item);
-        return "redirect:/validation/v3/items/{itemId}";
+        return "redirect:/validation/v4/items/{itemId}";
     }
 
     @PostMapping("/{itemId}/edit")
@@ -131,7 +127,7 @@ public class ValidationItemControllerV3 {
 
 
         itemRepository.update(itemId, item);
-        return "redirect:/validation/v3/items/{itemId}";
+        return "redirect:/validation/v4/items/{itemId}";
     }
 
 }
